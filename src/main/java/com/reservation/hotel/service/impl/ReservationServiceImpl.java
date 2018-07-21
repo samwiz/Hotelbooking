@@ -42,9 +42,7 @@ public class ReservationServiceImpl implements ReservationService{
 	public String showReservations(){
 		
 		return "Reservation Details !!";
-	}
-	
-	
+	}	
 
     public List<RoomReservation> getRoomReservationsForPhoneNumber(String phone){
     	
