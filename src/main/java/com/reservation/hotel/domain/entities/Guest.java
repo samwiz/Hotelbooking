@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="GUEST")
 public class Guest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="GUEST_ID")
     private long id;
     @Column(name="FIRST_NAME")

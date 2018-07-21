@@ -3,6 +3,8 @@ package com.reservation.hotel.service;
 import java.util.List;
 
 import com.reservation.hotel.domain.RoomReservation;
+import com.reservation.hotel.domain.entities.Guest;
+import com.reservation.hotel.domain.entities.Room;
 
 public interface ReservationService {
 
@@ -11,5 +13,11 @@ public interface ReservationService {
  List<RoomReservation> getRoomReservationsForDate(String dateString);
 
  List<RoomReservation> getRoomReservationsForPhoneNumber(String phone);
-
+ 
+ List<RoomReservation> getRoomReservationsForGuestId(String guestId);
+ 
+ List<Guest> getDetailOfAllGuests();
+ 
+ List<Room> getDetailOfAllRooms();
+ 
 }

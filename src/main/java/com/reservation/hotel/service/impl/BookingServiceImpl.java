@@ -29,7 +29,7 @@ public class BookingServiceImpl implements BookingService{
 	RoomRepository roomRepository;
 	
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-	private static final String getReservationsByDateURL = "http://localhost:8088/hotel/reservations/";
+	private static final String getReservationsByDateURL = "http://localhost:8088/hotel/reservations/guest/";
 	
 	//@Transactional
 	public List<RoomReservation> bookRoom(String roomId, String guestId, String date){
@@ -51,7 +51,7 @@ public class BookingServiceImpl implements BookingService{
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		return restTemplate.getForObject(getReservationsByDateURL+date, List.class);
+		return restTemplate.getForObject(getReservationsByDateURL+ guestId, List.class);
 		
 	}
 	

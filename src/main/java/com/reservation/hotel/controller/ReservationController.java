@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reservation.hotel.domain.RoomReservation;
+import com.reservation.hotel.domain.entities.Guest;
+import com.reservation.hotel.domain.entities.Room;
 import com.reservation.hotel.service.ReservationService;
 
 @RestController
@@ -30,10 +32,30 @@ public class ReservationController {
 	        return this.reservationService.getRoomReservationsForDate(dateString);
 	    }
 	 
-	//view already reserved rooms by phone number 
+	//view  reserved rooms by phone number 
 		 @RequestMapping(method= RequestMethod.GET, value="/reservations/phone/{phone}")
 		    public List<RoomReservation> getAllReservationsForPhoneNumber(@PathVariable String phone){
 		        return this.reservationService.getRoomReservationsForPhoneNumber(phone);
 		    }
+		 
+	 //view reserved rooms by guest Id 
+	 @RequestMapping(method= RequestMethod.GET, value="/reservations/guest/{guestId}")
+		    public List<RoomReservation> getAllReservationsForGuestId(@PathVariable String guestId){
+		        return this.reservationService.getRoomReservationsForGuestId(guestId);
+		    }
+	 
+	//view guest details for all guests 
+	 @RequestMapping(method= RequestMethod.GET, value="/guests")
+	    public List<Guest> getDetailsOfAllGuests(){
+	        return this.reservationService.getDetailOfAllGuests();
+	    }
+		 
+		 
+	//view guest details by guest Id 
+	 @RequestMapping(method= RequestMethod.GET, value="/rooms")
+	    public List<Room> getRoomDetailsOfAllRooms(){
+	        return this.reservationService.getDetailOfAllRooms();
+	    }
+		 
 	
 }

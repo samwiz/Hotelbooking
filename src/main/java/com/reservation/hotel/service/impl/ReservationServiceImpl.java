@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.reservation.hotel.data.repositories.GuestRepository;
 import com.reservation.hotel.data.repositories.ReservationRepository;
 import com.reservation.hotel.data.repositories.RoomRepository;
@@ -43,7 +44,56 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		return "Reservation Details !!";
 	}	
-
+	
+	
+	//fetch details of all rooms
+	public List<Room> getDetailOfAllRooms(){
+		return Lists.newArrayList(roomRepository.findAll());
+		
+	}
+	
+	//fetch details for all Guests
+	public List<Guest> getDetailOfAllGuests(){		
+		return Lists.newArrayList(guestRepository.findAll()) ;		
+		
+	}
+	
+	//fetch reservations by guest Id 
+	public List<RoomReservation> getRoomReservationsForGuestId(String guestId){
+		
+		
+    	List<RoomReservation> roomReservationList = new ArrayList<>();
+    	
+    	Optional<Guest> guest = this.guestRepository.findById(Long.parseLong(guestId));
+    	if(null!=guest){
+    		
+    	
+    	Iterable<Reservation> reservations = this.reservationRepository.findByGuestId(guest.get().getId());
+    	if(null!=reservations){
+    		 RoomReservation roomReservation = new RoomReservation();
+            reservations.forEach(reservation -> {
+                
+                    Long roomId= reservation.getRoomId();       
+                    Optional<Room> room = this.roomRepository.findById(roomId);
+                    roomReservation.setDate(reservation.getDate());
+                    roomReservation.setFirstName(guest.get().getFirstName());
+                    roomReservation.setLastName(guest.get().getLastName());
+                    roomReservation.setGuestId(guest.get().getId());
+                    roomReservation.setRoomName(room.get().getName());
+                    roomReservation.setRoomNumber(room.get().getNumber());
+                    roomReservationList.add(roomReservation);
+                
+            });
+        }
+    	
+    
+    	}
+    	
+    	return roomReservationList;
+		
+	}
+    
+	//fetch reservations by phone number
     public List<RoomReservation> getRoomReservationsForPhoneNumber(String phone){
     	
     	List<RoomReservation> roomReservationList = new ArrayList<>();

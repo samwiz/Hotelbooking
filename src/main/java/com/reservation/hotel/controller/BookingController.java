@@ -21,14 +21,11 @@ public class BookingController {
 	@Autowired
 	private BookingService bookingService;
 	
-	@RequestMapping(value="/book", method=RequestMethod.GET)
+	@RequestMapping(value="/book", method=RequestMethod.POST)
 	public List<RoomReservation> bookRoom( @RequestParam String roomId, @RequestParam String guestId, @RequestParam String date){
 		
-//		//book room for date 			
-		return bookingService.bookRoom(roomId, guestId, date);
-		
-		//return "Booked !!!!";
-		
+		//book room for date 			
+		return bookingService.bookRoom(roomId, guestId, date);	
 		
 	}
 
