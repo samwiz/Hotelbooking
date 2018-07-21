@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,15 +31,15 @@ public class BookingServiceImpl implements BookingService{
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 	private static final String getReservationsByDateURL = "http://localhost:8088/hotel/reservations/";
 	
-	@Transactional
+	//@Transactional
 	public List<RoomReservation> bookRoom(String roomId, String guestId, String date){
 		//List<RoomReservation> reservations= new ArrayList<>();	
 
 		
 		//change status of booked room to true		
-		Room room = roomRepository.findByNumber(roomId);		
-		room.setBooked(true);		
-		roomRepository.save(room);		
+		Optional<Room> room = roomRepository.findById(Long.parseLong(roomId));		
+		room.get().setBooked(true);		
+		roomRepository.save(room.get());		
 		
 		Reservation reservation = new Reservation();
 		

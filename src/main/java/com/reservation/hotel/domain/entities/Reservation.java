@@ -14,10 +14,11 @@ import java.sql.Date;
 @Table(name="RESERVATION")
 public class Reservation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="RESERVATION_ID")
     private long id;
+	
     @Column(name="ROOM_ID")
     private long roomId;
     @Column(name="GUEST_ID")
