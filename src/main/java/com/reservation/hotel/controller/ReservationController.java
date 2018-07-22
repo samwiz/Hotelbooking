@@ -56,6 +56,13 @@ public class ReservationController {
 	        return this.reservationService.getDetailOfAllGuests();
 	    }
 		 
+	 
+		//view guest details for all guests 
+		 @RequestMapping(method= RequestMethod.GET, value="/rooms")
+		    public List<Room> getDetailsOfAllRooms(){
+		        return this.reservationService.getDetailOfAllRooms();
+		    }
+			 
 		 
 	//view guest details by guest Id 
 	 @RequestMapping(method= RequestMethod.GET, value="/room/{roomId}")

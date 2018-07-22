@@ -20,6 +20,7 @@ import com.reservation.hotel.domain.entities.Room;
 import com.reservation.hotel.service.BookingService;
 
 @Service
+
 public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
@@ -29,7 +30,7 @@ public class BookingServiceImpl implements BookingService{
 	RoomRepository roomRepository;
 	
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-	private static final String getReservationsByDateURL = "http://localhost:8088/hotel/reservations/guest/";
+	private static final String getReservationsByGuestIdURL = "http://localhost:8088/hotel/reservations/guest/";
 	
 	//@Transactional
 	public List<RoomReservation> bookRoom(String roomId, String guestId, String date){
@@ -51,7 +52,7 @@ public class BookingServiceImpl implements BookingService{
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		return restTemplate.getForObject(getReservationsByDateURL+ guestId, List.class);
+		return restTemplate.getForObject(getReservationsByGuestIdURL + guestId, List.class);
 		
 	}
 	
