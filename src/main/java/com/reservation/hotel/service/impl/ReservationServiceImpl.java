@@ -45,7 +45,43 @@ public class ReservationServiceImpl implements ReservationService{
 		return "Reservation Details !!";
 	}	
 	
+	//fetch details of room by id 
+	public Room getDetailsOfRoomById(String roomId){
+		return roomRepository.findById(Long.parseLong(roomId)).get();	
+	}
 	
+	
+	//fetch details of Guests by Id
+		public Guest getDetailsOfGuestById(String guestId){		
+			return guestRepository.findById(Long.parseLong(guestId)).get();		
+			
+		}
+	
+	//fetch all reservations
+	public List<RoomReservation> getAllReservations(){
+		
+	  	List<RoomReservation> roomReservationList = new ArrayList<>();
+	  	
+		Iterable<Reservation> reservations = reservationRepository.findAll();
+		reservations.forEach(reservation->{
+			RoomReservation roomReservation = new RoomReservation();
+			roomReservation.setDate(reservation.getDate());
+			
+			Guest guest = getDetailsOfGuestById(Long.toString(reservation.getGuestId()));
+			
+			roomReservation.setGuestId(guest.getId());					  
+            roomReservation.setFirstName(guest.getFirstName());
+            roomReservation.setLastName(guest.getLastName());
+            
+            Room room = getDetailsOfRoomById(Long.toString(reservation.getRoomId()));
+            
+            roomReservation.setRoomName(room.getName());
+            roomReservation.setRoomNumber(room.getNumber());
+            roomReservationList.add(roomReservation);
+		});
+		
+		return roomReservationList;
+	}
 	//fetch details of all rooms
 	public List<Room> getDetailOfAllRooms(){
 		return Lists.newArrayList(roomRepository.findAll());

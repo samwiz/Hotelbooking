@@ -26,6 +26,12 @@ public class ReservationController {
 		return reservationService.showReservations();
 	}
 	
+	   //view all reservations
+		 @RequestMapping(method= RequestMethod.GET, value="/reservations")
+		    public List<RoomReservation> getAllReservations(){
+		        return this.reservationService.getAllReservations();
+		    }
+	
 	//view already reserved rooms by date dd-MM-yyyy Format
 	 @RequestMapping(method= RequestMethod.GET, value="/reservations/{date}")
 	    public List<RoomReservation> getAllReservationsForDate(@PathVariable(value="date")String dateString){
@@ -52,10 +58,16 @@ public class ReservationController {
 		 
 		 
 	//view guest details by guest Id 
-	 @RequestMapping(method= RequestMethod.GET, value="/rooms")
-	    public List<Room> getRoomDetailsOfAllRooms(){
-	        return this.reservationService.getDetailOfAllRooms();
+	 @RequestMapping(method= RequestMethod.GET, value="/room/{roomId}")
+	    public Room getRoomDetailsOfAllRooms(@PathVariable String roomId){
+	        return this.reservationService.getDetailsOfRoomById(roomId);
 	    }
 		 
+	//view guest details by guest Id 
+		 @RequestMapping(method= RequestMethod.GET, value="/guest/{guestId}")
+		    public Guest getGuestDetailsById(@PathVariable String guestId){
+		        return this.reservationService.getDetailsOfGuestById(guestId);
+		    }
+			 
 	
 }

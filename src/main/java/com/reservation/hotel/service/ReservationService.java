@@ -20,4 +20,10 @@ public interface ReservationService {
  
  List<Room> getDetailOfAllRooms();
  
+ List<RoomReservation> getAllReservations();
+ 
+ Guest getDetailsOfGuestById(String guestId);
+ 
+ Room getDetailsOfRoomById(String roomId);
+ 
 }
